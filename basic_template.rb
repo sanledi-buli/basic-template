@@ -70,10 +70,17 @@ if create_rvmrc_specific
       say "rvm failure: unable to use gemset #{app_name}, reason: #{e}"
       raise
     end
-    File.exist?('.ruby-version') ? say ".ruby-version file already exists" : create_file '.ruby-version', "#{RUBY_VERSION}\n"
-    File.exist?('.ruby-gemset') ? say ".ruby-gemset file already exists" : create_file '.ruby-gemset', "#{app_name}\n"
+    File.exist?('.ruby-version') ? say(".ruby-version file already exists") : create_file('.ruby-version', "#{RUBY_VERSION}\n")
+    File.exist?('.ruby-gemset') ? say(".ruby-gemset file already exists") : create_file('.ruby-gemset', "#{app_name}\n")
   else
     say "WARNING! RVM does not appear to be available."
   end
 end
 # End of rvmrc ----->
+
+# group development test 
+gem_group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+run 'bundle install'
+generate 'rspec:install' unless File.exists?('.rspec')
