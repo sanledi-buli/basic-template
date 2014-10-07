@@ -82,5 +82,10 @@ end
 gem_group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
+
+# group development
+gem_group :development do
+  gem 'brakeman', :require => false
+end
 run 'bundle install'
 generate 'rspec:install' unless File.exists?('.rspec')
